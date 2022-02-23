@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { OpenLayersService } from './open-layers.service';
+import { PythonBackendService } from './python-backend.service';
 
-describe('OpenLayersService', () => {
-  let service: OpenLayersService;
+describe('PythonBackendService', () => {
+  let service: PythonBackendService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(OpenLayersService);
+    service = TestBed.inject(PythonBackendService);
   });
 
   it('should be created', () => {

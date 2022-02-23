@@ -1,11 +1,9 @@
 import { Component, ElementRef, Output, ViewChild } from '@angular/core';
-import { Nominatim } from '../interfaces/nominatim';
-import { NominatimService } from '../services/nominatim.service';
 import { Photon, PhotonFeatureCollection } from '../interfaces/photon';
 import { PhotonService } from '../services/photon.service';
-import { OsrmService } from '../services/osrm.service';
-import { Osrm } from '../interfaces/osrm';
 import { EventEmitter } from '@angular/core';
+import { PythonBackendService } from '../services/python-backend.service';
+import { RouteResponse } from '../interfaces/routeResponse';
 
 @Component({
   selector: 'app-search',
@@ -14,11 +12,10 @@ import { EventEmitter } from '@angular/core';
 })
 export class SearchComponent {
 
-  @Output() emitter = new EventEmitter<Osrm>();
+  @Output() emitter = new EventEmitter<RouteResponse>();
   @ViewChild("inputautocompleteList") autocompleteList: ElementRef;
 
-  nominatimItemsFrom: Nominatim[] = [];
-  nominatimItemsTo: Nominatim[] = [];
+
 
   photonItemsFrom: Photon[] = [];
   photonItemsTo: Photon[] = [];
@@ -35,9 +32,8 @@ export class SearchComponent {
   selectedPhotonTo: Photon;
 
   constructor(
-    private nominatimService: NominatimService,
     private photonService: PhotonService,
-    private osrmService: OsrmService,
+    private pythonBackendService: PythonBackendService,
   ) { }
 
   getFormattedPhotonValue(p: Photon): string{
@@ -115,8 +111,8 @@ export class SearchComponent {
   }
 
   getRoute(): void{
-    this.osrmService.sendQueryRequest("https://routing.openstreetmap.de/routed-bike/route/v1/driving/" + this.longFrom + "," + this.latFrom + ";" + this.longTo + "," + this.latTo)
-      .subscribe((response: Osrm) => {
+    this.pythonBackendService.sendQueryRequest(this.latFrom.toString(), this.longFrom.toString(), this.latTo.toString(), this.longTo.toString())
+      .subscribe((response: RouteResponse) => {
         this.emitter.emit(response);
         /*
         this.mapComponent.updateSidebar(response);

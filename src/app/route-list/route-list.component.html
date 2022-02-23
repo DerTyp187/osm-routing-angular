@@ -2,17 +2,18 @@
   <h4>Your Route Steps</h4>
 
   <div class="route-list">
+    <!--
     <div *ngFor="let step of this.routeSteps" class="route-list-item" >
-      <!--Fork-->
+      Fork
       <div *ngIf="step.maneuver?.type != 'fork'" style="background-image: url('/assets/images/{{step.maneuver?.modifier }}.svg');">
         <p>{{step.maneuver?.type}} {{step.maneuver?.modifier}} <br> {{step.name}}</p>
       </div>
 
-      <!--Not Fork-->
+      Not Fork
       <div *ngIf="step.maneuver?.type == 'fork'" style="background-image: url('/assets/images/{{step.maneuver?.type }}-{{step.maneuver?.modifier }}.svg');">
         <p>{{step.maneuver?.type}} {{step.maneuver?.modifier}} <br> {{step.name}}</p>
       </div>
-    </div>
+    </div>-->
   </div>
 </div>
 

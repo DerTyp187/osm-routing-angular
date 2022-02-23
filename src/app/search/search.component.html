@@ -4,11 +4,6 @@
 	  	<input #inputFrom (click)="getValue(inputFrom.value, true)" (change)="getValue(inputFrom.value, true)" type="text" name="inputFrom" id="inputFrom" placeholder="From" value="{{ inputFromValue }}">
 		  <div #inputautocompleteList class="autocomplete-items autocomplete-items-from">
 
-			<div *ngFor="let item of nominatimItemsFrom" >
-				{{ item.display_name }}
-				<input type="hidden" value="{{ item.display_name }}">
-			</div>
-
       <!-- PHOTON -->
 			<div *ngFor="let item of photonItemsFrom"
 			(click)="selectPhoton(true, item);" >
@@ -29,11 +24,6 @@
 	<div class="autocomplete" id="autocompleteTo">
 		<input #inputTo (click)="getValue(inputTo.value, false)" (change)="getValue(inputTo.value, false)" type="text" name="inputTo" id="inputTo" placeholder="To" value="{{ inputToValue }}">
 		<div #inputautocompleteList class="autocomplete-items autocomplete-items-to">
-
-			<div *ngFor="let item of nominatimItemsTo" >
-				{{ item.display_name }}
-				<input type="hidden" value="{{ item.display_name }}">
-			</div>
 
 			<div *ngFor="let item of photonItemsTo"
 			(click)="selectPhoton(false, item)">

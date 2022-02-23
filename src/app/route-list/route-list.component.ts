@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Osrm, OsrmStep } from '../interfaces/osrm';
 
 @Component({
   selector: 'app-route-list',
@@ -7,7 +6,8 @@ import { Osrm, OsrmStep } from '../interfaces/osrm';
   styleUrls: ['./route-list.component.css']
 })
 export class RouteListComponent {
-
+  routeSteps = []
+  /*
   routeSteps: Array<OsrmStep> = [];
 
   updateSidebar(osrm: Osrm): void{
@@ -15,6 +15,6 @@ export class RouteListComponent {
     if (osrm.routes[0].legs[0].steps) {
       this.routeSteps = osrm.routes[0].legs[0].steps;
     }
-  }
+  }*/
 
 }

@@ -9,9 +9,9 @@ import ZoomToExtent from 'ol/control/ZoomToExtent';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import LineString from 'ol/geom/LineString';
-import { Osrm, OsrmStep } from '../interfaces/osrm';
 import { Feature } from 'ol';
 import Geometry from 'ol/geom/Geometry';
+import { RouteResponse } from '../interfaces/routeResponse';
 
 @Component({
   selector: 'app-map',
@@ -49,12 +49,13 @@ export class MapComponent implements AfterViewInit {
     setTimeout(() => this.map.updateSize(), 200);
   }
 
-  drawPath(osrm: Osrm): void{
+  drawPath(routeResponse: RouteResponse): void{
     // https://routing.openstreetmap.de/routed-bike/route/v1/driving/8.6042708,53.5151533;13.6887164,51.0491468?overview=false&alternatives=true&steps=true
-    console.log(osrm);
+    console.log(routeResponse);
 
-    const coordinates = osrm.routes[0].geometry.coordinates || [];
-    const fCoordinates: number[][] = coordinates.map(coordinate => (transform(coordinate, 'EPSG:4326', 'EPSG:3857')));
+    const nodes = routeResponse.nodes || [];
+
+    const fCoordinates: number[][] = nodes.map(node => (transform([node.lon, node.lat], 'EPSG:4326', 'EPSG:3857')));
     const lineString: LineString = new LineString(fCoordinates);
     const feature: Feature<Geometry> = new Feature({ geometry: lineString });
     const vectorSource = new VectorSource({ features: [ feature ]});

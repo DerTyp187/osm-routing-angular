@@ -1,7 +1,7 @@
 import { Component, ViewChild, } from '@angular/core';
-import { Osrm } from './interfaces/osrm';
 import { MapComponent } from './map/map.component';
 import { RouteListComponent } from './route-list/route-list.component';
+import { RouteResponse } from './interfaces/routeResponse';
 
 
 @Component({
@@ -16,9 +16,9 @@ export class AppComponent {
   @ViewChild('mapRef') mapCompopnent!: MapComponent;
   @ViewChild('routeListRef') routeListCompopnent!: RouteListComponent;
 
-  onSearchResponse($event: Osrm): void {
+  onSearchResponse($event: RouteResponse): void {
 		this.mapCompopnent.drawPath($event);
-    this.routeListCompopnent.updateSidebar($event);
+    //this.routeListCompopnent.updateSidebar($event);
 	}
 
 }
