@@ -1,0 +1,49 @@
+.osrm-route-container {
+  position: absolute;
+  right: 0;
+  width:300px;
+  margin-top: 50px;
+  background-color: rgba(27, 27, 27, 0.801);
+  top:0;
+  bottom: 0;
+  color: white;
+  overflow-y: scroll;
+}
+
+.osrm-route-container h4 {
+  text-align: center;
+  line-height: 30px;
+  letter-spacing: 1px;
+  padding-top: 0px;
+  margin-top: 2px;
+}
+
+.route-list {
+  width: 100%;
+  display: block;
+  font-weight: bold;
+  text-align: left;
+
+}
+
+.route-list .route-list-item {
+  width: 100%;
+  display: block;
+  border-top: 1px solid rgba(255, 255, 255, 0.418);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.route-list .route-list-item div {
+  width: 100%;
+  /*background-image: url('/assets/images/turn-left.svg');*/
+  background-repeat: no-repeat;
+  background-size: 35px 35px;
+  background-position:5px 10px;
+}
+
+.route-list .route-list-item div p {
+  display: inline-block;
+  text-transform: capitalize;
+  padding-left: 50px;
+}

@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/osm-routing-angular'),
+      dir: require('path').join(__dirname, './coverage/ts-streetmap'),
       subdir: '.',
       reporters: [
         { type: 'html' },
