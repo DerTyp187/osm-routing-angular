@@ -12,6 +12,7 @@ import LineString from 'ol/geom/LineString';
 import { Feature } from 'ol';
 import Geometry from 'ol/geom/Geometry';
 import { RouteResponse } from '../interfaces/routeResponse';
+import {Circle, Fill, Stroke, Style} from 'ol/style';
 
 @Component({
   selector: 'app-map',
@@ -21,6 +22,14 @@ import { RouteResponse } from '../interfaces/routeResponse';
 export class MapComponent implements AfterViewInit {
 
   map: Map;
+
+  lineStyle: Style = new Style({
+    stroke: new Stroke({
+      color: "blue",
+      width: 2
+    })
+  })
+
 
   ngAfterViewInit() {
     this.map = new Map({
@@ -54,14 +63,15 @@ export class MapComponent implements AfterViewInit {
     console.log(routeResponse);
 
     const nodes = routeResponse.nodes || [];
-
     const fCoordinates: number[][] = nodes.map(node => (transform([node.lon, node.lat], 'EPSG:4326', 'EPSG:3857')));
     const lineString: LineString = new LineString(fCoordinates);
     const feature: Feature<Geometry> = new Feature({ geometry: lineString });
+    feature.setStyle(this.lineStyle);
     const vectorSource = new VectorSource({ features: [ feature ]});
     const vectorLayer = new VectorLayer({ source: vectorSource });
+    this.map.removeLayer(this.map.getLayers().item(1))
     this.map.addLayer(vectorLayer);
-
+    
    // this.features = new GeoJSON().readFeatures(new openLayersGeoJSON())
 
    /*
