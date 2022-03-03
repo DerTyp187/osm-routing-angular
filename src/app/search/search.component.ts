@@ -22,7 +22,7 @@ export class SearchComponent {
   inputFromValue: string;
   inputToValue: string;
 
-  getRouteBtnEnabled: boolean = true;
+  isSearching: boolean = false;
 
   constructor(
     private pythonBackendService: PythonBackendService,
@@ -47,6 +47,8 @@ export class SearchComponent {
     this.searchItemsFrom = [];
     this.searchItemsTo = [];
 
+    value = value.trim();
+
     this.pythonBackendService.sendSearchQueryRequest(value, "10")
     .subscribe((response: SearchResponse) => response.ways?.forEach(way =>{
       if(isFrom){
@@ -60,17 +62,13 @@ export class SearchComponent {
   }
 
   getRoute(): void{
-    this.getRouteBtnEnabled = false;
+    if(this.selectedSearchWayFrom && this.selectedSearchWayTo)
+    this.isSearching = true;
     this.pythonBackendService.sendRouteQueryRequest(this.selectedSearchWayFrom.id.toString(), this.selectedSearchWayTo.id.toString())
-      .subscribe((response: RouteResponse) => {
-        console.log(response);
+      .subscribe(
+        (response: RouteResponse) => {
         this.emitter.emit(response);
-        this.getRouteBtnEnabled = true;
-        /*
-        this.mapComponent.updateSidebar(response);
-        this.mapComponent.drawPath(response);
-        */
-      }
-    );
+        this.isSearching = false;
+      });
   }
 }

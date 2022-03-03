@@ -25,8 +25,8 @@ export class MapComponent implements AfterViewInit {
 
   lineStyle: Style = new Style({
     stroke: new Stroke({
-      color: "blue",
-      width: 2
+      color: "#ff622e",
+      width: 3
     })
   })
 
@@ -72,6 +72,9 @@ export class MapComponent implements AfterViewInit {
     this.map.removeLayer(this.map.getLayers().item(1))
     this.map.addLayer(vectorLayer);
     
+    this.map.getView().setCenter(fCoordinates[0])
+    this.map.getView().setZoom(13);
+
    // this.features = new GeoJSON().readFeatures(new openLayersGeoJSON())
 
    /*
