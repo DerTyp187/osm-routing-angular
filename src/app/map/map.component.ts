@@ -12,7 +12,7 @@ import LineString from 'ol/geom/LineString';
 import { Feature } from 'ol';
 import Geometry from 'ol/geom/Geometry';
 import { RouteResponse } from '../interfaces/routeResponse';
-import {Circle, Fill, Stroke, Style} from 'ol/style';
+import {Stroke, Style} from 'ol/style';
 
 @Component({
   selector: 'app-map',
