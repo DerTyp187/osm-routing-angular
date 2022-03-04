@@ -3,6 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { PythonBackendService } from '../services/python-backend.service';
 import { RouteResponse } from '../interfaces/routeResponse';
 import { SearchResponse, SearchWay } from '../interfaces/searchResponse';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -65,10 +66,15 @@ export class SearchComponent {
     if(this.selectedSearchWayFrom && this.selectedSearchWayTo)
     this.isSearching = true;
     this.pythonBackendService.sendRouteQueryRequest(this.selectedSearchWayFrom.id.toString(), this.selectedSearchWayTo.id.toString())
+      .pipe(catchError(err =>{
+        console.error(err);
+        return of({nodes:[]});
+      }))
       .subscribe(
         (response: RouteResponse) => {
         this.emitter.emit(response);
         this.isSearching = false;
       });
   }
+  
 }
