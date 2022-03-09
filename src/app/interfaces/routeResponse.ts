@@ -1,9 +1,8 @@
-
-interface ResponseNode{
+interface ResponseNode {
   lat: number;
   lon: number;
 }
 
-export interface RouteResponse{
+export interface RouteResponse {
   nodes: Array<ResponseNode>;
 }

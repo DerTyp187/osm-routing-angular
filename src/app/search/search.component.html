@@ -1,25 +1,44 @@
-
 <div class="searchField">
-
-	<div class="autocomplete">
-	  	<input #inputFrom (click)="getValue(inputFrom.value, true)" (input)="getValue(inputFrom.value, true)" type="text" name="inputFrom" id="inputFrom" placeholder="From" value="{{ inputFromValue }}">
-		  <div class="autocomplete-items autocomplete-items-from">
+  <div class="autocomplete">
+    <input
+      #inputFrom
+      (click)="getValue(inputFrom.value, true)"
+      (input)="getValue(inputFrom.value, true)"
+      type="text"
+      name="inputFrom"
+      id="inputFrom"
+      placeholder="From"
+      value="{{ inputFromValue }}"
+    />
+    <div class="autocomplete-items autocomplete-items-from">
       <div *ngFor="let item of searchItemsFrom" (click)="select(true, item)">
         <label>{{ item.name }}</label>
       </div>
-		</div>
-	</div>
+    </div>
+  </div>
 
-
-	<div class="autocomplete" id="autocompleteTo">
-		<input #inputTo (click)="getValue(inputTo.value, false)" (input)="getValue(inputTo.value, false)" type="text" name="inputTo" id="inputTo" placeholder="To" value="{{ inputToValue }}">
-		<div #inputautocompleteList class="autocomplete-items autocomplete-items-to">
+  <div class="autocomplete" id="autocompleteTo">
+    <input
+      #inputTo
+      (click)="getValue(inputTo.value, false)"
+      (input)="getValue(inputTo.value, false)"
+      type="text"
+      name="inputTo"
+      id="inputTo"
+      placeholder="To"
+      value="{{ inputToValue }}"
+    />
+    <div #inputautocompleteList class="autocomplete-items autocomplete-items-to">
       <div *ngFor="let item of searchItemsTo" (click)="select(false, item)">
         <label>{{ item.name }}</label>
       </div>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 
-<button *ngIf="!isSearching" class="routeBtn" (click)="getRoute()">Route</button>
-<img *ngIf="isSearching"src="/assets/images/loading.gif" style="margin-top:15px; margin-left:10px;width:25px;height: 25px;" />
+<ng-container *ngIfElse="isSearching" else routeBtn>
+  <img src="/assets/images/loading.gif" style="margin-top: 15px; margin-left: 10px; width: 25px; height: 25px" />
+</ng-container>
+<ng-template #routeBtn>
+  <button class="routeBtn" (click)="getRoute()">Route</button>
+</ng-template>

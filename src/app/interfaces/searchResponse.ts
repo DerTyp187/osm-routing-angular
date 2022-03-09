@@ -1,8 +1,8 @@
-export interface SearchWay{
+export interface SearchWay {
   id: number;
   name: string;
 }
 
-export interface SearchResponse{
+export interface SearchResponse {
   ways: Array<SearchWay>;
 }

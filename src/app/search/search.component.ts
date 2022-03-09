@@ -29,12 +29,12 @@ export class SearchComponent {
     private pythonBackendService: PythonBackendService,
   ) { }
 
-  select(isFrom: boolean, item: SearchWay): void{
-    if(isFrom){
+  select(isFrom: boolean, item: SearchWay): void {
+    if (isFrom) {
       this.selectedSearchWayFrom = item;
       this.inputFromValue = item.name;
       this.searchItemsFrom = [];
-    }else{
+    } else {
       this.selectedSearchWayTo = item;
       this.inputToValue = item.name;
       this.searchItemsTo = [];
@@ -50,31 +50,31 @@ export class SearchComponent {
 
     value = value.trim();
 
-    this.pythonBackendService.sendSearchQueryRequest(value, "10")
-    .subscribe((response: SearchResponse) => response.ways?.forEach(way =>{
-      if(isFrom){
-        this.searchItemsFrom.push(way);
-        this.selectedSearchWayFrom = way;
-      }else{
-        this.searchItemsTo.push(way);
-        this.selectedSearchWayTo = way;
-      }
-    }));
+    this.pythonBackendService.sendSearchQueryRequest(value, "10") // "10" -> limit of search results
+      .subscribe((response: SearchResponse) => response.ways?.forEach(way => {
+        if (isFrom) {
+          this.searchItemsFrom.push(way);
+          this.selectedSearchWayFrom = way;
+        } else {
+          this.searchItemsTo.push(way);
+          this.selectedSearchWayTo = way;
+        }
+      }));
   }
 
-  getRoute(): void{
-    if(this.selectedSearchWayFrom && this.selectedSearchWayTo)
-    this.isSearching = true;
+  getRoute(): void {
+    if (this.selectedSearchWayFrom && this.selectedSearchWayTo)
+      this.isSearching = true;
     this.pythonBackendService.sendRouteQueryRequest(this.selectedSearchWayFrom.id.toString(), this.selectedSearchWayTo.id.toString())
-      .pipe(catchError(err =>{
+      .pipe(catchError(err => {
         console.error(err);
-        return of({nodes:[]});
+        return of({ nodes: [] });
       }))
       .subscribe(
         (response: RouteResponse) => {
-        this.emitter.emit(response);
-        this.isSearching = false;
-      });
+          this.emitter.emit(response);
+          this.isSearching = false;
+        });
   }
-  
+
 }

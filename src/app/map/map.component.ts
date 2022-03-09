@@ -12,7 +12,7 @@ import LineString from 'ol/geom/LineString';
 import { Feature } from 'ol';
 import Geometry from 'ol/geom/Geometry';
 import { RouteResponse } from '../interfaces/routeResponse';
-import {Stroke, Style} from 'ol/style';
+import { Stroke, Style } from 'ol/style';
 
 @Component({
   selector: 'app-map',
@@ -58,7 +58,7 @@ export class MapComponent implements AfterViewInit {
     setTimeout(() => this.map.updateSize(), 200);
   }
 
-  drawPath(routeResponse: RouteResponse): void{
+  drawPath(routeResponse: RouteResponse): void {
     // https://routing.openstreetmap.de/routed-bike/route/v1/driving/8.6042708,53.5151533;13.6887164,51.0491468?overview=false&alternatives=true&steps=true
     console.log(routeResponse);
 
@@ -67,25 +67,25 @@ export class MapComponent implements AfterViewInit {
     const lineString: LineString = new LineString(fCoordinates);
     const feature: Feature<Geometry> = new Feature({ geometry: lineString });
     feature.setStyle(this.lineStyle);
-    const vectorSource = new VectorSource({ features: [ feature ]});
+    const vectorSource = new VectorSource({ features: [feature] });
     const vectorLayer = new VectorLayer({ source: vectorSource });
     this.map.removeLayer(this.map.getLayers().item(1))
     this.map.addLayer(vectorLayer);
-    
+
     this.map.getView().setCenter(fCoordinates[0])
     this.map.getView().setZoom(13);
 
-   // this.features = new GeoJSON().readFeatures(new openLayersGeoJSON())
+    // this.features = new GeoJSON().readFeatures(new openLayersGeoJSON())
 
-   /*
-    this.vectorLayer = new VectorLayer({
-      background: '#1a2b39',
-      source: new VectorSource({
-        url: 'http://router.project-osrm.org/route/v1/driving/-1.8744130630953275,52.45318441573963;-1.879401971863028,52.451059431849615;-1.8783612747652496,52.44962092302177;-1.882395317123648,52.44969938835112;-1.8824275036318268,52.452046744809195;-1.8794663448793851,52.45332825709778;-1.8898840446932288,52.454230523991356?overview=full&steps=true&geometries=geojson',
-        format: new GeoJSON({dataProjection: 'EPSG:4326', featureProjection: "EPSG:3857" }),
-      })
-    });
-
-    this.map.addLayer(this.vectorLayer);*/
+    /*
+     this.vectorLayer = new VectorLayer({
+       background: '#1a2b39',
+       source: new VectorSource({
+         url: 'http://router.project-osrm.org/route/v1/driving/-1.8744130630953275,52.45318441573963;-1.879401971863028,52.451059431849615;-1.8783612747652496,52.44962092302177;-1.882395317123648,52.44969938835112;-1.8824275036318268,52.452046744809195;-1.8794663448793851,52.45332825709778;-1.8898840446932288,52.454230523991356?overview=full&steps=true&geometries=geojson',
+         format: new GeoJSON({dataProjection: 'EPSG:4326', featureProjection: "EPSG:3857" }),
+       })
+     });
+ 
+     this.map.addLayer(this.vectorLayer);*/
   }
 }
