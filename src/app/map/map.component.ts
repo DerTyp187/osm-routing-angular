@@ -28,7 +28,7 @@ export class MapComponent implements AfterViewInit {
       color: "#ff622e",
       width: 3
     })
-  })
+  });
 
 
   ngAfterViewInit() {
