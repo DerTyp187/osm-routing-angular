@@ -74,18 +74,5 @@ export class MapComponent implements AfterViewInit {
 
     this.map.getView().setCenter(fCoordinates[0])
     this.map.getView().setZoom(13);
-
-    // this.features = new GeoJSON().readFeatures(new openLayersGeoJSON())
-
-    /*
-     this.vectorLayer = new VectorLayer({
-       background: '#1a2b39',
-       source: new VectorSource({
-         url: 'http://router.project-osrm.org/route/v1/driving/-1.8744130630953275,52.45318441573963;-1.879401971863028,52.451059431849615;-1.8783612747652496,52.44962092302177;-1.882395317123648,52.44969938835112;-1.8824275036318268,52.452046744809195;-1.8794663448793851,52.45332825709778;-1.8898840446932288,52.454230523991356?overview=full&steps=true&geometries=geojson',
-         format: new GeoJSON({dataProjection: 'EPSG:4326', featureProjection: "EPSG:3857" }),
-       })
-     });
- 
-     this.map.addLayer(this.vectorLayer);*/
   }
 }
